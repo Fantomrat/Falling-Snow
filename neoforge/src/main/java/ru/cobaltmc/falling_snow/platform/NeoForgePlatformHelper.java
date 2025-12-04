@@ -1,5 +1,6 @@
 package ru.cobaltmc.falling_snow.platform;
 
+import net.neoforged.fml.loading.FMLEnvironment;
 import ru.cobaltmc.falling_snow.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
@@ -20,7 +21,7 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isDevelopmentEnvironment() {
-
-        return !FMLLoader.getCurrent().isProduction();
+        //Fuck you, neoforge
+        return false;
     }
 }
