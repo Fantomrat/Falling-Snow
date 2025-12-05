@@ -2,11 +2,12 @@ package ru.cobaltmc.falling_snow;
 
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
 
-@net.neoforged.fml.common.Mod(Constants.MOD_ID)
-public class Mod {
+@Mod(Constants.MOD_ID)
+public class ModN {
 
-    public Mod(IEventBus eventBus) {
+    public ModN(IEventBus eventBus) {
 
         // This method is invoked by the NeoForge mod loader when it is ready
         // to load your mod. You can access NeoForge and Common code in this
