@@ -1,5 +1,5 @@
-# Modstitch Stonecutter Template
+# Falling Snow
 
-This is the recommended template for using Modstitch.
+A small mod that adds falling snow, just like in Bedrock
 
-Refer to the modstitch documentation for setup instructions.
+![Falling snow](https://files.cobaltmc.ru/images/falling-snow-layers/1.webp)
