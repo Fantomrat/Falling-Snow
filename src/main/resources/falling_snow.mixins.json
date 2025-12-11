@@ -1,0 +1,15 @@
+{
+  "package": "ru.cobaltmc.falling_snow.mixin",
+  "refmap": "falling_snow.refmap.json",
+  "required": true,
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "FallingBlockMixin",
+    "FallingBlockEntityMixin",
+    "SnowLayerBlockMixin"
+  ]
+}
