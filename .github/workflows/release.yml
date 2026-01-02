@@ -42,7 +42,8 @@ jobs:
           for jar in versions/*/build/libs/*.jar; do
             echo "Publishing $jar"
 
-            version_dir=$(basename "$(dirname "$(dirname "$jar")")")
+            version_dir=$(echo "$jar" | cut -d/ -f2)
+            echo "Detected version_dir: $version_dir"
 
             LOADERS=""
             MC_VERSIONS=""
