@@ -27,6 +27,14 @@ jobs:
       - name: Build
         run: ./gradlew build
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Modrinth CLI
+        run: npm install -g modrinth
+
       - name: Create GitHub Release and upload assets
         uses: softprops/action-gh-release@v2
         with:
@@ -96,7 +104,7 @@ jobs:
             esac
 
 
-            npx modrinth publish \
+            modrinth publish \
               --token "$MODRINTH_TOKEN" \
               --project 7MhT4CjY \
               --version "${{ github.event.release.tag_name }}" \
