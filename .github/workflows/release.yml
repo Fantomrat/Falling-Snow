@@ -3,6 +3,16 @@ name: build-and-release
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      skip_build:
+        description: 'Skip Gradle build step'
+        required: false
+        default: 'false'
+      skip_publish:
+        description: 'Skip Modrinth publish'
+        required: false
+        default: 'false'
 
 jobs:
   release:
@@ -25,7 +35,15 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build
+        if: ${{ github.event.inputs.skip_build != 'true' }}
         run: ./gradlew build
+
+      - name: Download prebuilt jars
+        if: ${{ github.event.inputs.skip_build == 'true' }}
+        uses: actions/download-artifact@v3
+        with:
+          name: jars
+          path: versions/*/build/libs/
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -36,6 +54,7 @@ jobs:
         run: npm install -g modrinth
 
       - name: Create GitHub Release and upload assets
+        if: ${{ github.event.inputs.skip_publish != 'true' }}
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -43,11 +62,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: jars
+          path: versions/*/build/libs/*.jar
+
       - name: Publish all jars to Modrinth
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
-          for jar in versions/*/build/libs/*.jar; do
+          jars=$(ls versions/*/build/libs/*.jar 2>/dev/null || true)
+          
+          if [ -z "$jars" ]; then
+            echo "No JAR files found, skipping Modrinth publish"
+            exit 0
+          fi
+          
+          for jar in $jars; do
             echo "Publishing $jar"
 
             version_dir=$(echo "$jar" | cut -d/ -f2)
@@ -104,7 +136,7 @@ jobs:
             esac
 
 
-            modrinth publish \
+            npx modrinth publish \
               --token "$MODRINTH_TOKEN" \
               --project 7MhT4CjY \
               --version "${{ github.event.release.tag_name }}" \
