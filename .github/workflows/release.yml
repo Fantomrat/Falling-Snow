@@ -44,15 +44,7 @@ jobs:
         with:
           name: jars
           path: versions/*/build/libs/
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Modrinth CLI
-        run: npm install -g @modrinth/modrinth
-
+          
       - name: Create GitHub Release and upload assets
         if: ${{ github.event.inputs.skip_publish != 'true' }}
         uses: softprops/action-gh-release@v2
@@ -68,7 +60,7 @@ jobs:
           name: jars
           path: versions/*/build/libs/*.jar
 
-      - name: Publish all jars to Modrinth
+      - name: Publish all jars to Modrinth and Curseforge
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
