@@ -71,6 +71,7 @@ jobs:
       - name: Publish all jars to Modrinth
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: |
           ./gradlew publishMods \
               -PMODRINTH_TOKEN="$MODRINTH_TOKEN" \
