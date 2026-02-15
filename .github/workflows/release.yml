@@ -51,7 +51,7 @@ jobs:
           node-version: '20'
 
       - name: Install Modrinth CLI
-        run: npm install -g modrinth
+        run: npm install -g @modrinth/modrinth
 
       - name: Create GitHub Release and upload assets
         if: ${{ github.event.inputs.skip_publish != 'true' }}
