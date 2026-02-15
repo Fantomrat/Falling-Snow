@@ -76,4 +76,5 @@ jobs:
           ./gradlew publishMods \
               -PMODRINTH_TOKEN="$MODRINTH_TOKEN" \
               -PCURSEFORGE_TOKEN="$CURSEFORGE_TOKEN" \
+              -PreleaseChangelog="${{ github.event.release.body }}" \
               --console=plain

@@ -177,8 +177,11 @@ publishMods {
 
     displayName = "${modstitch.metadata.modName.get()} ${modstitch.metadata.modVersion.get()}"
     version = modstitch.metadata.modVersion.get()
-    changelog = rootProject.file("CHANGELOG.md").readText()
     type = STABLE
+
+    val changelogText: String = (findProperty("releaseChangelog") as? String?)
+        ?: rootProject.file("CHANGELOG.md").readText()
+    changelog = changelogText
 
     when {
         project.name.contains("fabric") -> {
