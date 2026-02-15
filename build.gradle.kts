@@ -1,5 +1,6 @@
 plugins {
     id("dev.isxander.modstitch.base") version "0.5.14-unstable"
+    id("me.modmuss50.mod-publish-plugin") version "0.8.4"
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -168,3 +169,58 @@ modstitch.mixin.registerSourceSet(
     sourceSets["main"],
     providers.provider { "falling_snow.refmap.json" }
 )
+
+publishMods {
+    val jarFileName = "${modstitch.metadata.modId.get()}-${project.name}-${modstitch.metadata.modVersion.get()}.jar"
+
+    file.set(layout.buildDirectory.file("libs/$jarFileName"))
+
+    displayName = "${modstitch.metadata.modName.get()} ${modstitch.metadata.modVersion.get()}"
+    version = modstitch.metadata.modVersion.get()
+    changelog = rootProject.file("CHANGELOG.md").readText()
+    type = STABLE
+
+    when {
+        project.name.contains("fabric") -> {
+            modLoaders.add("fabric")
+        }
+        project.name.contains("neoforge") -> {
+            modLoaders.add("neoforge")
+        }
+        project.name.contains("forge") -> {
+            modLoaders.add("forge")
+        }
+    }
+
+    val mcVersions = when {
+        project.name.startsWith("1.20.1") -> listOf("1.20.1")
+        project.name.startsWith("1.21.1") -> listOf("1.21.1")
+        project.name.startsWith("1.20-1.21.1") -> listOf(
+            "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6",
+            "1.21", "1.21.1"
+        )
+        project.name.startsWith("1.21.2-1.21.3") -> listOf("1.21.2", "1.21.3")
+        project.name.startsWith("1.21.4") -> listOf("1.21.4")
+        project.name.startsWith("1.21.5") -> listOf("1.21.5")
+        project.name.startsWith("1.21.6-1.21.8") -> listOf("1.21.6", "1.21.7", "1.21.8")
+        project.name.startsWith("1.21.9-1.21.11") -> listOf("1.21.9", "1.21.10", "1.21.11")
+        else -> throw IllegalArgumentException("Unknown MC version range: ${project.name}")
+    }
+
+    dryRun = providers.environmentVariable("MODRINTH_TOKEN").getOrNull() == null ||
+            providers.environmentVariable("CURSEFORGE_TOKEN").getOrNull() == null
+
+    modrinth {
+        projectId = "soBfQALz"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.set(mcVersions)
+    }
+
+    curseforge {
+        projectId = "1398594"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.set(mcVersions)
+    }
+
+
+}
