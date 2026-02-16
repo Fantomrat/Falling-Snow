@@ -16,6 +16,8 @@ modstitch {
     // Alternatively use stonecutter.eval if you have a lot of versions to target.
     // https://stonecutter.kikugie.dev/stonecutter/guide/setup#checking-versions
     javaTarget = when (minecraft) {
+        "1.18.2" -> 17
+        "1.19.2" -> 17
         "1.20.1" -> 17
         "1.20.4" -> 17
         "1.21.1" -> 21
@@ -54,6 +56,8 @@ modstitch {
             // modstitch doesn't initially support. Some examples below.
             put("mod_issue_tracker", "https://github.com/Fantomrat/Falling-Snow/issues")
             put("pack_format", when (property("deps.minecraft")) {
+                "1.18.2" -> 8
+                "1.19.2" -> 9
                 "1.20.1" -> 15
                 "1.20.4" -> 22
                 "1.21.1" -> 34
@@ -195,6 +199,9 @@ publishMods {
     }
 
     val mcVersions = when {
+        project.name.startsWith("1.18.2") -> listOf("1.18.2")
+        project.name.startsWith("1.19.2") -> listOf("1.19.2")
+        project.name.startsWith("1.19-1.19.4") -> listOf("1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4")
         project.name.startsWith("1.20.1") -> listOf("1.20.1")
         project.name.startsWith("1.21.1") -> listOf("1.21.1")
         project.name.startsWith("1.20-1.21.1") -> listOf(

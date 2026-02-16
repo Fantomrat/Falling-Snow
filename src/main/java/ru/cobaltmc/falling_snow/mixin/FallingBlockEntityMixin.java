@@ -46,7 +46,10 @@ public abstract class FallingBlockEntityMixin {
         if (!ModConfig.getInstance().snowStacking) return;
 
         FallingBlockEntity self = (FallingBlockEntity)(Object)this;
-        Level level = self.level();
+        //? if >=1.20 {
+        /*Level level = self.level();
+        *///?} else if <1.20 {
+        Level level = self.level;
         BlockPos blockPos = self.blockPosition();
         BlockState blockStateAbove = level.getBlockState(blockPos.above());
         BlockState blockStateBelow= level.getBlockState(blockPos.below());

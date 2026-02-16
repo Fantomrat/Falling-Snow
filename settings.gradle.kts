@@ -31,6 +31,9 @@ stonecutter {
 
     create(rootProject) {
 
+        version("1.18.2-forge", "1.18.2")
+        version("1.18.2-fabric", "1.18.2")
+        version("1.19-1.19.4-fabric", "1.19.2")
         version("1.20-1.21.1-fabric", "1.20.1")
         version("1.21.2-1.21.3-fabric", "1.21.3")
         version("1.21.4-fabric", "1.21.4")
@@ -38,6 +41,8 @@ stonecutter {
         version("1.21.6-1.21.11-fabric", "1.21.8")
         version("1.21.1-neoforge", "1.21.1")
         version("1.20.1-forge", "1.20.1")
+        version("1.19.2-forge", "1.19.2")
+
 
 
         // This is the default target.
