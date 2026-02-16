@@ -7,8 +7,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 //? if >1.18.2 {
-/*import net.minecraft.util.RandomSource;
-*///?}
+import net.minecraft.util.RandomSource;
+//?}
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -40,17 +40,17 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
     }
 
     //? if >=1.20 {
-    /*private boolean isFree(BlockState blockState) {
+    private boolean isFree(BlockState blockState) {
         return blockState.isAir() || blockState.liquid() || blockState.canBeReplaced() && !blockState.is(Blocks.SNOW);
     }
-    *///?} else if <1.20 {
-    private boolean isFree(BlockState blockState) {
+    //?} else if <1.20 {
+    /*private boolean isFree(BlockState blockState) {
         return blockState.isAir() || blockState.getMaterial().isLiquid() && !blockState.is(Blocks.SNOW);
     }
-    //?}
+    *///?}
 
     //? if <=1.21.1 && >=1.20 {
-    /*@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
     protected void snowLayerUpdateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2, CallbackInfoReturnable<BlockState> cir) {
         if (!(world instanceof Level level)) return;
 
@@ -64,8 +64,8 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             cir.cancel();
         }
     }
-    *///?} else if <=1.19.2 && >=1.18 {
-    @Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
+    //?} else if <=1.19.2 && >=1.18 {
+    /*@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
     protected void snowLayerUpdateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2, CallbackInfoReturnable<BlockState> cir) {
         if (!(world instanceof Level level)) return;
 
@@ -77,7 +77,7 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             cir.cancel();
         }
     }
-    //?} else if >1.21.1 {
+    *///?} else if >1.21.1 {
     /*@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
         protected void snowLayerUpdateShape(BlockState state, LevelReader world, ScheduledTickAccess scheduled, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource randomSource, CallbackInfoReturnable<BlockState> cir) {
         if (!(world instanceof Level level)) return;
@@ -102,7 +102,7 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
     }
 
     //? if >1.18.2 {
-    /*@Override
+    @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (isFree(world.getBlockState(pos.below()))) {
             FallingBlockEntity fall = FallingBlockEntity.fall(world, pos, state);
@@ -111,8 +111,8 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             world.removeBlock(pos, false);
         }
     }
-    *///?} else if <=1.18.2 {
-    @Override
+    //?} else if <=1.18.2 {
+    /*@Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         if (isFree(world.getBlockState(pos.below()))) {
             FallingBlockEntity fall = FallingBlockEntity.fall(world, pos, state);
@@ -121,5 +121,5 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             world.removeBlock(pos, false);
         }
     }
-    //?}
+    *///?}
 }

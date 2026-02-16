@@ -47,9 +47,10 @@ public abstract class FallingBlockEntityMixin {
 
         FallingBlockEntity self = (FallingBlockEntity)(Object)this;
         //? if >=1.20 {
-        /*Level level = self.level();
-        *///?} else if <1.20 {
-        Level level = self.level;
+        Level level = self.level();
+        //?} else if <1.20 {
+        /*Level level = self.level;
+        *///?}
         BlockPos blockPos = self.blockPosition();
         BlockState blockStateAbove = level.getBlockState(blockPos.above());
         BlockState blockStateBelow= level.getBlockState(blockPos.below());
@@ -92,4 +93,3 @@ public abstract class FallingBlockEntityMixin {
 
 
 }
-
