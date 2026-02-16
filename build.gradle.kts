@@ -41,7 +41,7 @@ modstitch {
     metadata {
         modId = "falling_snow"
         modName = "Falling Snow"
-        modVersion = "1.1.1"
+        modVersion = "1.1.2"
         modGroup = "ru.cobaltmc.falling_snow"
         modAuthor = "Fantomrat"
 
