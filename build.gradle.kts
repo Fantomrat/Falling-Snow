@@ -65,6 +65,7 @@ modstitch {
                 "1.21.4" -> 46
                 "1.21.5" -> 55
                 "1.21.8" -> 64
+                "1.21.10" -> 69
                 else -> throw IllegalArgumentException("Please store the resource pack version for ${property("deps.minecraft")} in build.gradle.kts! https://minecraft.wiki/w/Pack_format")
             }.toString())
         }
@@ -211,7 +212,8 @@ publishMods {
         project.name.startsWith("1.21.2-1.21.3") -> listOf("1.21.2", "1.21.3")
         project.name.startsWith("1.21.4") -> listOf("1.21.4")
         project.name.startsWith("1.21.5") -> listOf("1.21.5")
-        project.name.startsWith("1.21.6-1.21.11") -> listOf("1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11")
+        project.name.startsWith("1.21.6-1.21.8") -> listOf("1.21.6", "1.21.7", "1.21.8")
+        project.name.startsWith("1.21.9-1.21.11") -> listOf("1.21.9", "1.21.10", "1.21.11")
         else -> throw IllegalArgumentException("Unknown MC version range: ${project.name}")
     }
 
