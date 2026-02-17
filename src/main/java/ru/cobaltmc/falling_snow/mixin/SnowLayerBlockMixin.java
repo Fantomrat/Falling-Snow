@@ -6,17 +6,11 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-//? if >1.18.2 {
 import net.minecraft.util.RandomSource;
-//?}
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-//? if >=1.21.2 && <=1.21.11 {
-/*import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-*///?}
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
@@ -28,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ru.cobaltmc.falling_snow.ModConfig;
 
-import java.util.Random;
-
 import static net.minecraft.world.level.block.SnowLayerBlock.LAYERS;
 
 @Mixin(SnowLayerBlock.class)
@@ -39,47 +31,23 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
         super(properties);
     }
 
-    //? if >=1.20 {
     private boolean isFree(BlockState blockState) {
         return blockState.isAir() || blockState.liquid() || blockState.canBeReplaced() && !blockState.is(Blocks.SNOW);
     }
-    //?} else if <1.20 {
-    /*private boolean isFree(BlockState blockState) {
-        return blockState.isAir() || blockState.getMaterial().isLiquid() && !blockState.is(Blocks.SNOW);
-    }
-    *///?}
 
-    //? if <=1.21.1 && >=1.20 {
+    
     @Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
-    protected void snowLayerUpdateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2, CallbackInfoReturnable<BlockState> cir) {
-        if (!(world instanceof Level level)) return;
-
-        BlockPos below = pos.below();
-
-        if (isFree(level.getBlockState(below)) && pos.getY() >= level.getMinBuildHeight()) {
-            level.scheduleTick(pos, (SnowLayerBlock)(Object)this, 2);
-            System.out.println("Pos: " + below);
-
-            cir.setReturnValue(state);
-            cir.cancel();
-        }
-    }
-    //?} else if <=1.19.2 && >=1.18 {
-    /*@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
-    protected void snowLayerUpdateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2, CallbackInfoReturnable<BlockState> cir) {
-        if (!(world instanceof Level level)) return;
-
-        BlockPos below = pos.below();
-        if (isFree(level.getBlockState(below)) && pos.getY() >= level.getMinBuildHeight()) {
-            level.scheduleTick(pos, (SnowLayerBlock)(Object)this, 2);
-
-            cir.setReturnValue(state);
-            cir.cancel();
-        }
-    }
-    *///?} else if >1.21.1 {
-    /*@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
-        protected void snowLayerUpdateShape(BlockState state, LevelReader world, ScheduledTickAccess scheduled, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource randomSource, CallbackInfoReturnable<BlockState> cir) {
+    protected void snowLayerUpdateShape(
+            BlockState state,
+            LevelReader world,
+            ScheduledTickAccess scheduled,
+            BlockPos pos,
+            Direction direction,
+            BlockPos pos2,
+            BlockState state2,
+            RandomSource randomSource,
+            CallbackInfoReturnable<BlockState> cir
+    ) {
         if (!(world instanceof Level level)) return;
 
         BlockPos below = pos.below();
@@ -90,9 +58,6 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             cir.cancel();
         }
     }
-    *///?}
-
-
 
     public void onLand(Level level, BlockPos blockPos, BlockState blockState, BlockState blockState2, FallingBlockEntity fallingBlockEntity) {
         if (!(level instanceof ServerLevel world)) return;
@@ -101,7 +66,6 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
         if (ModConfig.getInstance().playSound) world.playSound(null, blockPos, SoundEvents.SNOW_PLACE, SoundSource.BLOCKS, 1f, 0.9f);
     }
 
-    //? if >1.18.2 {
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (isFree(world.getBlockState(pos.below()))) {
@@ -111,15 +75,5 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
             world.removeBlock(pos, false);
         }
     }
-    //?} else if <=1.18.2 {
-    /*@Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if (isFree(world.getBlockState(pos.below()))) {
-            FallingBlockEntity fall = FallingBlockEntity.fall(world, pos, state);
-            fall.dropItem = false;
-            world.addFreshEntity(fall);
-            world.removeBlock(pos, false);
-        }
-    }
-    *///?}
+
 }

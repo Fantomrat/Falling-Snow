@@ -8,16 +8,17 @@ license = "${mod_license}"
     version = "${mod_version}"
     displayName = "${mod_name}"
     description = '''${mod_description}'''
-    authors = "${mod_author}"
+    authors = ${mod_author}
 
 [[dependencies.${mod_id}]]
-    modId = "forge"
-    mandatory = true
+    modId = "neoforge"
+    type = "required"
     ordering = "NONE"
     side = "BOTH"
-    versionRange = "[0,99)"
 
 [[dependencies.${mod_id}]]
     modId = "minecraft"
-    mandatory = true
-    versionRange = "1.20.1"
+    type = "required"
+
+[[mixins]]
+    config = "falling_snow.mixins.json"

@@ -11,11 +11,16 @@ license = "${mod_license}"
     authors = "${mod_author}"
 
 [[dependencies.${mod_id}]]
-    modId = "neoforge"
-    type = "required"
+    modId = "forge"
+    mandatory = true
     ordering = "NONE"
     side = "BOTH"
+    versionRange = "[45.0.0,50.0.0)"
 
 [[dependencies.${mod_id}]]
     modId = "minecraft"
-    type = "required"
+    mandatory = true
+    versionRange = "*"
+
+[[mixins]]
+config = "falling_snow.mixins.json"

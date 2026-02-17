@@ -1,1 +1,0 @@
-- Fix [Snow not falling on server](https://github.com/Fantomrat/Falling-Snow/issues/3)

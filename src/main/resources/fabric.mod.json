@@ -1,0 +1,25 @@
+{
+	"schemaVersion": 1,
+	"id": "${id}",
+	"version": "${version}",
+	"name": "${name}",
+	"description": "",
+	"authors": ${authors},
+	"contact": {
+	},
+	"license": "${license}",
+	"icon": "assets/falling_snow/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "ru.cobaltmc.falling_snow.FallingSnow"
+		]
+	},
+	"mixins": [
+		"falling_snow.mixins.json"
+	],
+	"depends": {
+		"minecraft": "*",
+		"java": ">=25"
+	}
+}

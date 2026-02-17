@@ -1,6 +1,11 @@
 package ru.cobaltmc.falling_snow;
 
-public class FallingSnow {
-    public static void initialize() {
-    }
+import net.fabricmc.api.ModInitializer;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class FallingSnow implements ModInitializer {
+	@Override
+	public void onInitialize() {}
 }

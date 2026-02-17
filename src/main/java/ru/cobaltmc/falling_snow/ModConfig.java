@@ -3,6 +3,7 @@ package ru.cobaltmc.falling_snow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+import net.minecraft.client.Minecraft;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,21 +11,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-//? fabric {
-import net.fabricmc.loader.api.FabricLoader;
- //?} forge {
-/*import net.minecraftforge.fml.loading.FMLPaths;
-*///?} neoforge {
-/*import net.neoforged.fml.loading.FMLPaths;
-*///?}
+
 
 
 public class ModConfig {
-    //? fabric {
-    static Path CONFIG_FILE_PATH = FabricLoader.getInstance().getConfigDir().resolve("falling_snow.json");
-    //?} forge || neoforge {
-    /*static Path CONFIG_FILE_PATH = FMLPaths.CONFIGDIR.get().resolve("falling_snow.json");
-    *///?}
+    static Path CONFIG_FILE_PATH = Minecraft.getInstance().gameDirectory.toPath().resolve("config").resolve("falling_snow.json");
 
     static ModConfig instance;
     static Gson JSON = new GsonBuilder().setPrettyPrinting().create();
