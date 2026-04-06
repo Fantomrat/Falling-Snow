@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 
@@ -39,8 +40,12 @@ public class ModConfig {
     public static boolean load() {
         if (!CONFIG_FILE_PATH.toFile().exists()) {
             instance = new ModConfig();
-            try (FileOutputStream stream = new FileOutputStream(CONFIG_FILE_PATH.toFile())) {
-                stream.write(JSON.toJson(instance).getBytes(StandardCharsets.UTF_8));
+            try {
+                Files.createDirectories(CONFIG_FILE_PATH.getParent());
+
+                try (FileOutputStream stream = new FileOutputStream(CONFIG_FILE_PATH.toFile())) {
+                    stream.write(JSON.toJson(instance).getBytes(StandardCharsets.UTF_8));
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

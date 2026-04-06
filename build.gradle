@@ -18,6 +18,7 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven { url = 'https://maven.minecraftforge.net' }
 }
 
 dependencies {
@@ -25,6 +26,9 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	compileOnly "net.minecraftforge:javafmllanguage:1.21.6-56.0.0"
+	compileOnly "net.minecraftforge:fmlcore:1.21.6-56.0.0"
+	compileOnly 'net.minecraftforge:eventbus:7.0.2'
 	
 }
 
@@ -103,6 +107,12 @@ jar {
 
 	from("LICENSE") {
 		rename { "${it}_${inputs.properties.archivesName}"}
+	}
+
+	manifest {
+		attributes(
+				'MixinConfigs': project.archives_base_name + ".forge.mixins.json"
+		)
 	}
 }
 

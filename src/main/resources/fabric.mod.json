@@ -10,16 +10,12 @@
 	"license": "${license}",
 	"icon": "assets/falling_snow/icon.png",
 	"environment": "*",
-	"entrypoints": {
-		"main": [
-          "ru.cobaltmc.falling_snow.FallingSnow"
-		]
-	},
+	"entrypoints": {},
 	"mixins": [
 		"falling_snow.mixins.json"
 	],
 	"depends": {
-		"minecraft": "*",
+		"minecraft": ">=26.1",
 		"java": ">=25"
 	}
 }

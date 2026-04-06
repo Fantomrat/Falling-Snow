@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "ru.cobaltmc.falling_snow.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FallingBlockMixin",
+    "FallingBlockEntityMixin",
+    "SnowLayerBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}

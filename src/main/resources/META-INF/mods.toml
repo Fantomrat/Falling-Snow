@@ -8,19 +8,20 @@ license = "${mod_license}"
     version = "${mod_version}"
     displayName = "${mod_name}"
     description = '''${mod_description}'''
-    authors = "${mod_author}"
+    authors = ${mod_author}
 
 [[dependencies.${mod_id}]]
     modId = "forge"
     mandatory = true
     ordering = "NONE"
     side = "BOTH"
-    versionRange = "[45.0.0,50.0.0)"
-
+    versionRange="[63,)"
 [[dependencies.${mod_id}]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "*"
+    versionRange = "[26.1,)"
+    ordering="NONE"
+    side="BOTH"
 
 [[mixins]]
 config = "falling_snow.mixins.json"
