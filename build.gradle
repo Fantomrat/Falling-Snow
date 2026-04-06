@@ -144,6 +144,7 @@ publishMods {
 	modLoaders.add("fabric")
 	modLoaders.add("quilt")
 	modLoaders.add("neoforge")
+	modLoaders.add("forge")
 
 	curseforge {
 		projectId = "1398594"
