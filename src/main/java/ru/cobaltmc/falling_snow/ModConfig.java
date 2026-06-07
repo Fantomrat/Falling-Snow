@@ -3,7 +3,6 @@ package ru.cobaltmc.falling_snow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.client.Minecraft;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,7 +15,7 @@ import java.nio.file.Path;
 
 
 public class ModConfig {
-    static Path CONFIG_FILE_PATH = Minecraft.getInstance().gameDirectory.toPath().resolve("config").resolve("falling_snow.json");
+    static Path CONFIG_FILE_PATH = Path.of("config", "falling_snow.json");
 
     static ModConfig instance;
     static Gson JSON = new GsonBuilder().setPrettyPrinting().create();
