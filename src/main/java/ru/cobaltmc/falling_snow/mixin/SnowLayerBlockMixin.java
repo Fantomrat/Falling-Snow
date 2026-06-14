@@ -71,7 +71,6 @@ public class SnowLayerBlockMixin extends Block implements Fallable {
         if (isFree(world.getBlockState(pos.below()))) {
             FallingBlockEntity fall = FallingBlockEntity.fall(world, pos, state);
             fall.dropItem = false;
-            world.removeBlock(pos, false);
         }
     }
 
